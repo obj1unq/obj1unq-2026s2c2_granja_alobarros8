@@ -10,6 +10,7 @@ object mercado {
 
 object granja {
 	const property cultivos = #{}
+	const cosechados = []
 	method plantar(cultivo, position) {
 		self.validarPlantar(cultivo, position)
 		cultivo.position(position)
@@ -32,7 +33,28 @@ object granja {
 			self.error("No hay nada para regar")
 		}
 	}
+	method cultivoEn(posicion) {
+		 return cultivos.find({ cultivo => cultivo.position() == posicion }) 
+	}
 	method regar(posicion) {
 		self.validarRegar(posicion)
 		const cultivo = cultivos.find({ cultivo => cultivo.position() == posicion }) cultivo.regar() }
+	
+	method validarCosechar(posicion) { 
+		if (not self.hayCultivo(posicion)) {
+			 self.error("No hay nada para cosechar") 
+			 } 
+		const cultivo = self.cultivoEn(posicion) 
+		if (not cultivo.estaListoParaCosechar()) { 
+			self.error("El cultivo no está listo para cosechar") 
+			} 
+	} 
+	method cosechar(posicion) { 
+		self.validarCosechar(posicion) 
+		const cultivo = self.cultivoEn(posicion) 
+		cultivos.remove(cultivo) 
+		cosechados.add(cultivo) 
+		game.removeVisual(cultivo) 
+		}
+
 }

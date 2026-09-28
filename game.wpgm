@@ -23,7 +23,8 @@ program laGranja{
   keyboard.m().onPressDo({ personaje.sembrarMaiz() })
   keyboard.t().onPressDo({ personaje.sembrarTrigo() })
   keyboard.o().onPressDo({ personaje.sembrarTomaco() })
-  keyboard.r().onPressDo({personaje.regar()})
+  keyboard.r().onPressDo({ personaje.regar()})
+  keyboard.c().onPressDo({ personaje.cosechar() })
   game.start()
 }
 

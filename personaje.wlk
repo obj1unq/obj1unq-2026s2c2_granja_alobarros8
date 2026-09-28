@@ -1,6 +1,6 @@
 
 import wollok.game.*
-import granja.*
+import 	granja.*
 
 import cultivos.*
 object femenino{
@@ -25,7 +25,7 @@ object masculino{
 object personaje {
 	var property genero = femenino
 	var property position = game.center()
-	const propiedad = granja
+	const propiedad = 	granja
 	
 	method  image() {
 		return genero.prefijo() + "-player-" + self.estado() + ".png"
@@ -44,22 +44,23 @@ object personaje {
 		propiedad.plantar(cultivo, self.position())
 	} 
 	
+ 	 method sembrarMaiz() {
+    	granja.plantar(maiz, position)
+	  }
 
-  // === ACCIONES DE SIEMBRA ===
+ 	 method sembrarTrigo() {
+    	granja.plantar(trigo, position)
+  	}
 
-  method sembrarMaiz() {
-    granja.plantar(maiz, position)
-  }
-
-  method sembrarTrigo() {
-    granja.plantar(trigo, position)
-  }
-
-  method sembrarTomaco() {
-    granja.plantar(tomaco, position)
-  }
+	  method sembrarTomaco() {
+    	granja.plantar(tomaco, position)
+ 	 }
   
-  method regar() { 
-    granja.regar(position)
-  }
+ 	 method regar() { 
+    	granja.regar(position)
+  	}
+
+	method cosechar() { 
+		granja.cosechar(position)
+	}
 }
