@@ -27,10 +27,12 @@ object granja {
 	method hayCultivo(position) {
 		return cultivos.any({cultivo => cultivo.position() == position})
 	}
-
+	method validarRegar(posicionActual) {
+		if ( not self.hayCultivo(posicionActual) ){
+			self.error("No hay nada para regar")
+		}
+	}
 	method regar(posicion) {
-		if (not self.hayCultivo(posicion)) {
-			 self.error("no tengo nada para regar") 
-			 } 
+		self.validarRegar(posicion)
 		const cultivo = cultivos.find({ cultivo => cultivo.position() == posicion }) cultivo.regar() }
 }
