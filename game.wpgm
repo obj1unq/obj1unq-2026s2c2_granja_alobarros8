@@ -10,7 +10,8 @@ program laGranja{
   game.width(10)
 
   game.addVisual(personaje)
-
+  game.addVisual(mercado)
+  
   // Teclado - Movimiento
   keyboard.up().onPressDo({ personaje.position(personaje.position().up(1)) })
   keyboard.down().onPressDo({ personaje.position(personaje.position().down(1)) })
