@@ -1,9 +1,69 @@
+
 import wollok.game.*
+import personaje.*
 import granja.*
-describe "test de la granja" {
+import cultivos.*
+describe "Tests de Granjavilla - Personaje y Parte 1 (Sembrar)" {
 
+  method initialize() {
+    game.clear()
+    personaje.position(game.at(5, 5))
+    granja.cultivos().clear()
+  }
 
-    test "personaje" {
-        assert.that(true)
-    }
+  test "1. Cambio de género e imagen del personaje" {
+    // Femenino mirando al frente (sin elementos debajo)
+    assert.equals("f-player-normal.png", personaje.image())
+
+    // Cambiar a masculino
+    personaje.cambiarGenero()
+    assert.equals("m-player-normal.png", personaje.image())
+
+    // Cambiar de nuevo a femenino
+    personaje.cambiarGenero()
+    assert.equals("f-player-normal.png", personaje.image())
+  }
+
+  test "2. Imagen del personaje mirando hacia abajo cuando hay un cultivo debajo" {
+    // Inicialmente mira al frente
+    assert.equals("f-player-normal.png", personaje.image())
+
+    // Siembra tomaco en su posición (5,5)
+    personaje.sembrarTomaco()
+
+    // Ahora está sobre un elemento -&gt; mira hacia abajo
+    assert.equals("f-player-abajo.png", personaje.image())
+  }
+
+  test "3. Ejemplo completo de la Parte 1: Sembrar" {
+    // El personaje comienza en la posición (5,5)
+    assert.equals(game.at(5, 5), personaje.position())
+
+    // El personaje planta el tomaco
+    personaje.sembrarTomaco()
+
+    // Verificar que la posición del tomaco es (5,5)
+    assert.equals(game.at(5, 5), tomaco.position())
+
+    // Verificar que el único cultivo de la granja es el tomaco
+    assert.equals(#{tomaco}, granja.cultivos())
+
+    // El personaje intenta plantar el trigo, pero no puede porque ya hay un cultivo en esa parcela
+    assert.throwsException({ personaje.sembrarTrigo() })
+
+    // El personaje se cambia a la posición (6,6)
+    personaje.position(game.at(6, 6))
+
+    // El personaje intenta plantar el tomaco, pero no puede porque ya está plantado
+    assert.throwsException({ personaje.sembrarTomaco() })
+
+    // El personaje planta el trigo
+    personaje.sembrarTrigo()
+
+    // Verificar que la posición del trigo es (6,6)
+    assert.equals(game.at(6, 6), trigo.position())
+
+    // Verificar que los cultivos de la granja son el tomaco y el trigo
+    assert.equals(#{tomaco, trigo}, granja.cultivos())
+  }
 }
