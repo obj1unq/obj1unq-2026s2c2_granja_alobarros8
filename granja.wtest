@@ -66,4 +66,5 @@ describe "Tests de Granjavilla - Personaje y Parte 1 (Sembrar)" {
     // Verificar que los cultivos de la granja son el tomaco y el trigo
     assert.equals(#{tomaco, trigo}, granja.cultivos())
   }
+
 }

@@ -58,4 +58,8 @@ object personaje {
   method sembrarTomaco() {
     granja.plantar(tomaco, position)
   }
+  
+  method regar() { 
+    granja.regar(position)
+  }
 }
