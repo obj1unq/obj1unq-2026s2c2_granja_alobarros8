@@ -67,4 +67,6 @@ object granja {
 	method hayCultivo(position) {
 		return cultivos.any({cultivo => cultivo.position() == position})
 	}
+
+	
 }

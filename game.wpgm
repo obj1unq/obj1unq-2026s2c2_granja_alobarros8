@@ -1,17 +1,28 @@
-import wollok.game.*
-import personaje.*
 import cultivos.*
 
-program lagranja {
-	//  CONFIG	
-	game.title("La granja")
-	game.height(10)
-	game.width(10)
-	game.ground("fondo.png")
+import wollok.game.*
+import personaje.*
+import granja.*
 
- 	game.addVisualCharacter(personaje)
- 	
+program laGranja{
+  game.title("Granjavilla")
+  game.height(10)
+  game.width(10)
 
- 	//  COMIENZA
-	game.start()
+  game.addVisual(personaje)
+
+  // Teclado - Movimiento
+  keyboard.up().onPressDo({ personaje.position(personaje.position().up(1)) })
+  keyboard.down().onPressDo({ personaje.position(personaje.position().down(1)) })
+  keyboard.left().onPressDo({ personaje.position(personaje.position().left(1)) })
+  keyboard.right().onPressDo({ personaje.position(personaje.position().right(1)) })
+
+  // Teclado - Acciones
+  keyboard.g().onPressDo({ personaje.cambiarGenero() })
+  keyboard.m().onPressDo({ personaje.sembrarMaiz() })
+  keyboard.t().onPressDo({ personaje.sembrarTrigo() })
+  keyboard.o().onPressDo({ personaje.sembrarTomaco() })
+
+  game.start()
 }
+
